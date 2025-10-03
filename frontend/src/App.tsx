@@ -9,7 +9,7 @@ type Book = {
   author: string;
 };
 
-const API_BASE = "https://android_server.rahulsharma.biz/";
+const API_BASE = "https://android_server.rahulsharma.biz/api";
 
 const BooksManager: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
