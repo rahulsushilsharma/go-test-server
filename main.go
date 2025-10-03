@@ -20,6 +20,6 @@ func main() {
 
 	// Run the server on port 8080
 	// By default, Gin will listen on :8080
-	println("Server is running on http://localhost:8080")
-	router.Run(":8080")
+	println("Server is running on http://localhost:                                                                            ")
+	router.Run(":8001")
 }
