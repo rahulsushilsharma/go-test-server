@@ -8,7 +8,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Model
 type Book struct {
 	ID     uint   `json:"id" gorm:"primaryKey"`
 	Title  string `json:"title"`
@@ -24,20 +23,29 @@ func main() {
 	if err != nil {
 		panic("failed to connect database")
 	}
-
-	// Auto-migrate schema
 	db.AutoMigrate(&Book{})
 
 	r := gin.Default()
 
-	// Routes
-	r.GET("/books", getBooks)
-	r.GET("/books/:id", getBook)
-	r.POST("/books", createBook)
-	r.PUT("/books/:id", updateBook)
-	r.DELETE("/books/:id", deleteBook)
+	// Serve React app
+	r.Static("/static", "./frontend/dist/static")
+	r.StaticFile("/", "./frontend/dist/index.html")
 
-	// Start server
+	// API routes
+	api := r.Group("/api")
+	{
+		api.GET("/books", getBooks)
+		api.GET("/books/:id", getBook)
+		api.POST("/books", createBook)
+		api.PUT("/books/:id", updateBook)
+		api.DELETE("/books/:id", deleteBook)
+	}
+
+	// Catch-all route to serve React app for client-side routing
+	r.NoRoute(func(c *gin.Context) {
+		c.File("./frontend/build/index.html")
+	})
+
 	r.Run(":8001")
 }
 
