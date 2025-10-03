@@ -28,7 +28,7 @@ func main() {
 	r := gin.Default()
 
 	// Serve React app
-	r.Static("/static", "./frontend/dist/static")
+	r.Static("/assets", "./frontend/dist/assets")
 	r.StaticFile("/", "./frontend/dist/index.html")
 
 	// API routes
@@ -43,7 +43,7 @@ func main() {
 
 	// Catch-all route to serve React app for client-side routing
 	r.NoRoute(func(c *gin.Context) {
-		c.File("./frontend/build/index.html")
+		c.File("./frontend/dist/index.html")
 	})
 
 	r.Run(":8001")
