@@ -11,7 +11,7 @@ func main() {
 	router := gin.Default()
 
 	// Define a GET endpoint at the root path "/"
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/sm20_android", func(c *gin.Context) {
 		// Respond with a JSON message and an HTTP 200 OK status
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Hello, Gin!",
